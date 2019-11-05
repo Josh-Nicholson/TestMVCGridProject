@@ -14,6 +14,11 @@ namespace TestMVCGridProject
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
             services.Configure<CookiePolicyOptions>(options =>
             {                
                 options.CheckConsentNeeded = context => true;

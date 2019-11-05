@@ -1,5 +1,5 @@
 /*!
- * Mvc.Grid 5.0.1
+ * Mvc.Grid 5.1.1
  * https://github.com/NonFactors/MVC6.Grid
  *
  * Copyright © NonFactors
@@ -826,16 +826,16 @@ var MvcGridFilter = (function () {
 
             return '<div class="popup-arrow"></div>' +
                 '<div class="popup-content">' +
+                '<div class="popup-filter">' +
+                filter.renderFilter('first') +
+                '</div>' +
+                (filter.mode == 'excel' && filter.type == 'double'
+                    ? filter.renderOperator() +
                     '<div class="popup-filter">' +
-                        filter.renderFilter('first') +
-                    '</div>' +
-                    (filter.mode == 'excel' && filter.type == 'double'
-                        ? filter.renderOperator() +
-                        '<div class="popup-filter">' +
-                            filter.renderFilter('second') +
-                        '</div>'
-                        : '') +
-                    filter.renderActions() +
+                    filter.renderFilter('second') +
+                    '</div>'
+                    : '') +
+                filter.renderActions() +
                 '</div>';
         },
         renderFilter: function (name) {
@@ -845,35 +845,35 @@ var MvcGridFilter = (function () {
             var multiple = filter.type == 'multi' ? ' multiple' : '';
 
             return '<div class="popup-group">' +
-                       '<select class="mvc-grid-method" data-filter="' + name + '">' +
-                           filter.methods.map(function (method) {
-                               return '<option value="' + method + '">' + (lang[method] || '') + '</option>';
-                           }).join('') +
-                       '</select>' +
-                   '</div>' +
-                   '<div class="popup-group">' + (hasOptions
-                       ? '<select class="mvc-grid-value" data-filter="' + name + '"' + multiple + '>' +
-                           filter.column.filter.options.innerHTML +
-                       '</select>'
-                       : '<input class="mvc-grid-value" data-filter="' + name + '">') +
-                   '</div>';
+                '<select class="mvc-grid-method" data-filter="' + name + '">' +
+                filter.methods.map(function (method) {
+                    return '<option value="' + method + '">' + (lang[method] || '') + '</option>';
+                }).join('') +
+                '</select>' +
+                '</div>' +
+                '<div class="popup-group">' + (hasOptions
+                    ? '<select class="mvc-grid-value" data-filter="' + name + '"' + multiple + '>' +
+                    filter.column.filter.options.innerHTML +
+                    '</select>'
+                    : '<input class="mvc-grid-value" data-filter="' + name + '">') +
+                '</div>';
         },
         renderOperator: function () {
             return '<div class="popup-operator">' +
-                       '<div class="popup-group">' +
-                           '<select class="mvc-grid-operator">' +
-                               '<option value="">' + this.lang.operator.select + '</option>' +
-                               '<option value="and">' + this.lang.operator.and + '</option>' +
-                               '<option value="or">' + this.lang.operator.or + '</option>' +
-                           '</select>' +
-                       '</div>' +
-                   '</div>';
+                '<div class="popup-group">' +
+                '<select class="mvc-grid-operator">' +
+                '<option value="">' + this.lang.operator.select + '</option>' +
+                '<option value="and">' + this.lang.operator.and + '</option>' +
+                '<option value="or">' + this.lang.operator.or + '</option>' +
+                '</select>' +
+                '</div>' +
+                '</div>';
         },
         renderActions: function () {
             return '<div class="popup-actions">' +
-                       '<button type="button" class="mvc-grid-apply" type="button">' + this.lang.filter.apply + '</button>' +
-                       '<button type="button" class="mvc-grid-cancel" type="button">' + this.lang.filter.remove + '</button>' +
-                   '</div>';
+                '<button type="button" class="mvc-grid-apply" type="button">' + this.lang.filter.apply + '</button>' +
+                '<button type="button" class="mvc-grid-cancel" type="button">' + this.lang.filter.remove + '</button>' +
+                '</div>';
         },
 
         apply: function () {
