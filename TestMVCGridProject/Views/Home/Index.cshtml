@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section AddToHead{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/mvc-grid/css/mvc-grid.css">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/mvc-grid/css/mvc-grid.css">
+    </environment>
+}
+
+@using (Html.BeginForm())
+{
+    <partial name="_ExampleResultsModal" />
+    <input type="image" id="GridButton" src="/images/example.png" />
+}
+
+@section Scripts{
+    <script src="~/lib/mvc-grid/js/mvc-grid.js"></script>
+    <script src="~/js/index.js"></script>
+}

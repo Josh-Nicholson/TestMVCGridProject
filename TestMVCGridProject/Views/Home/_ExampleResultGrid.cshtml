@@ -1,0 +1,22 @@
+﻿@model TestMVCGridProject.Models.ExampleGridModel
+
+@(Html.Grid(Model.Examples)
+      .Build(columns =>
+      {
+          columns.Add(model => model.Id).Titled("ID");
+          columns.Add(model => model.ExampleName).Titled("ExampleName");
+          columns.Add(model => model.ExampleText).Titled("ExampleText");
+      })
+      .Empty("No Data Found")
+      .Id("Example-Grid")
+      .Filterable()
+      .Sortable()
+      .Pageable(pager =>
+      {
+          pager.PageSizes = new Dictionary<int, string> { { 5, "5" }, { 10, "10" }, { 15, "15" }, { 20, "20" }, { 0, "All" } };
+          pager.ShowPageSizes = true;
+          pager.CurrentPage = 1;
+          pager.PagesToDisplay = 6;
+          pager.RowsPerPage = 5;
+      })
+)
